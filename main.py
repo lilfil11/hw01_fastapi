@@ -56,7 +56,12 @@ def get_post() -> Timestamp:
 
 @app.get('/dog')
 def get_dogs(kind: DogType = None) -> List[Dog]:
-    return [dog for dog in dogs_db.values() if dog.kind == kind]
+    dogs = [dog for dog in dogs_db.values() if dog.kind == kind]
+    
+    if dogs:
+        return dogs
+
+    return list(dogs_db.values())
 
 
 @app.post('/dog')
